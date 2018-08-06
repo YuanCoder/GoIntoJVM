@@ -6,3 +6,5 @@
 > 从类被加载到虚拟机内存中开始，到卸御出内存为止，它的整个生命周期分为7个阶段，加载(Loading)、验证(Verification)、准备(Preparation)、解析(Resolution)、初始化(Initialization)、使用(Using)、卸御(Unloading)。其中验证、准备、解析三个部分统称为连接。
   7个阶段发生的顺序如下：
   
+  ![Network](../pics/classload.jpg)
+  
