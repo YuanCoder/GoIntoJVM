@@ -76,6 +76,17 @@
 >  > 2. 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类；
 >  > 3. 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效；
 
+* 类的加载
+>  * 类加载有三种方式：
+>  > 1. 命令行启动应用时候由JVM初始化加载；
+>  > 2. 通过Class.forName()方法动态加载；
+>  > 3. 通过ClassLoader.loadClass()方法动态加载；
+
+>  * [Class.forName()和ClassLoader.loadClass()区别](../../src/com.jenpin/classloader/ClassLoaderTest.class)：
+>  > 1. Class.forName()：将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块；
+>  > 2. ClassLoader.loadClass()：只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块；
+>  > 3. Class.forName(name, initialize, loader)带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象；
+
 * 双亲委派模型
 >  * 双亲委派模型的工作流程:
 >   > 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。
@@ -84,3 +95,10 @@
 >  > 2. 当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。
 >  > 3. 如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载。
 >  > 4. 若ExtClassLoader也加载失败，则会使用AppClassLoader来加载，如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException。
+>  * 双亲委派模型意义：
+>  > 1. 系统类防止内存中出现多份同样的字节码。
+>  > 2. 保证Java程序安全稳定运行。
+
+
+* 自定义类加载器
+
