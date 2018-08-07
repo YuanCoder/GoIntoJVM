@@ -1,6 +1,4 @@
-package com.jenpin.classloader;/**
- * Created by Administrator on 2018/8/7.
- */
+package com.jenpin.classloader;
 
 import java.io.*;
 
