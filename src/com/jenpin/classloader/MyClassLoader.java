@@ -53,7 +53,6 @@ public class MyClassLoader extends ClassLoader{
 
         MyClassLoader classLoader = new MyClassLoader();
         classLoader.setRoot("E:\\temp");
-
         Class<?> testClass = null;
         try {
             testClass = classLoader.loadClass("com.jenpin.classloader.Test2");
