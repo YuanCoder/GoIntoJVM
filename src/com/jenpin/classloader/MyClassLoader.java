@@ -20,6 +20,11 @@ public class MyClassLoader extends ClassLoader{
         }
     }
 
+    /**
+     * 将class 文件转换为字节数组
+     * @param className
+     * @return
+     */
     private byte[] loadClassData(String className) {
         String fileName = root + File.separatorChar
                 + className.replace('.', File.separatorChar) + ".class";
