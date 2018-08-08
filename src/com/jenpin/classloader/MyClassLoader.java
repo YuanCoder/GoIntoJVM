@@ -1,6 +1,10 @@
 package com.jenpin.classloader;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * @author: Jenpin
@@ -56,17 +60,27 @@ public class MyClassLoader extends ClassLoader{
 
         MyClassLoader classLoader = new MyClassLoader();
         classLoader.setRoot("D:\\");
-        Class<?> testClass = null;
+        Class<?> clazz = null;
         try {
-            testClass = classLoader.loadClass("com.jenpin.classloader.Test3");
+            clazz = classLoader.loadClass("com.jenpin.classloader.Test");
+            System.out.println(clazz.getClass().getModifiers());
+            System.out.println(Modifier.toString(clazz.getClass().getModifiers()));
+            System.out.println(Modifier.isPublic(17));
+//            Modifier.classModifiers();
 
-            Object object = testClass.newInstance();
+            Object object = clazz.newInstance();
             System.out.println(object.getClass().getClassLoader());
+            Method helloMethod = clazz.getDeclaredMethod("hello", null);
+            helloMethod.invoke(object, null);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }
