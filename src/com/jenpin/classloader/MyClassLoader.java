@@ -50,10 +50,11 @@ public class MyClassLoader extends ClassLoader{
     public static void main(String[] args)  {
 
         MyClassLoader classLoader = new MyClassLoader();
-        classLoader.setRoot("E:\\temp");
+        classLoader.setRoot("D:\\");
         Class<?> testClass = null;
         try {
-            testClass = classLoader.loadClass("com.jenpin.classloader.Test2");
+            testClass = classLoader.loadClass("com.jenpin.classloader.Test3");
+
             Object object = testClass.newInstance();
             System.out.println(object.getClass().getClassLoader());
         } catch (ClassNotFoundException e) {
